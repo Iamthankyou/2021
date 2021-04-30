@@ -16,7 +16,7 @@ const app = Vue.createApp({
     },
 
     setName(event, lastName){
-      this.name = event.target.value + ' ' + lastName;
+      this.name = event.target.value;
     },
 
     submitForm(event){
@@ -25,6 +25,11 @@ const app = Vue.createApp({
 
     confirmInput(){
       this.confirmName = this.name;
+    },
+
+    resetInput(){
+      this.name = '';
+
     }
     
   }
