@@ -3,20 +3,30 @@ const app = Vue.createApp({
         return {
             boxASelected:false,
             boxBSelected:false,
-            boxCselected:false,
+            boxCSelected:false,
         }
     },
     
+    computed:{
+        boxAClass(){
+            return {active: this.boxASelected};
+        },
+
+        boxBClass(){
+            return {active: this.boxBSelected};
+        }
+    },
+
     methods:{  
         boxSelected(box){
             if (box === 'A'){
-                this.boxASelected = true;
+                this.boxASelected = !this.boxASelected;
             }
             else if (box === 'B'){
-                this.boxBSelected = true;
+                this.boxBSelected = !this.boxBSelected;
             }
             else {
-                this.boxCSelected = true;
+                this.boxCSelected = !this.boxCSelected;
             }
         }
     }
