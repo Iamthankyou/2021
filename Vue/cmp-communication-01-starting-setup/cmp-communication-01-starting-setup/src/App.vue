@@ -5,15 +5,12 @@
     </header>
     <ul>
       <friend-contact 
-        name="Nguyễn Quỳnh Anh" 
-        phone-number="01234578"
-        email-address="manuloren@gmail.com"
-        is-favorite="1"
-      ></friend-contact>
-      <friend-contact 
-        name="John Lorenz" 
-        phone-number="01234578" 
-        email-address="manuloren@gmail.com"
+        v-for="friend in friends"
+        :key="friend.id"
+        :name="friend.name" 
+        :phone-number="friend.phone"
+        :email-address="friend.email"
+        :is-favorite="false"
       ></friend-contact>
     </ul>
   </section>
@@ -26,7 +23,7 @@ export default {
       friends: [
         {
           id: "manuel",
-          name: "Manuel Lorenz",
+          name: "Nguyễn Quỳnh Anh",
           phone: "0123 45678 90",
           email: "manuel@localhost.com",
         },
