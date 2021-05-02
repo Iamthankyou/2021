@@ -14,7 +14,6 @@
         name="John Lorenz" 
         phone-number="01234578" 
         email-address="manuloren@gmail.com"
-        is-favorite="0"
       ></friend-contact>
     </ul>
   </section>
