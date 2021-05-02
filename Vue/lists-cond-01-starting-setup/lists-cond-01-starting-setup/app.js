@@ -5,7 +5,7 @@ const app = Vue.createApp({
       goals: [] 
     };
   },
-  methods:{
+  methods:{ 
     addGoal(){
       if (this.enterdGoalValue.length>0){
         this.goals.push(this.enterdGoalValue);
