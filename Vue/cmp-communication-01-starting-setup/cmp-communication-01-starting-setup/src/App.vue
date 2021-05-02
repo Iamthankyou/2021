@@ -4,8 +4,18 @@
       <h1>My Friends</h1>
     </header>
     <ul>
-      <friend-contact name="Nguyễn Quỳnh Anh" phone-number="01234578" email-address="manuloren@gmail.com"></friend-contact>
-      <friend-contact name="John Lorenz" phone-number="01234578" email-address="manuloren@gmail.com"></friend-contact>
+      <friend-contact 
+        name="Nguyễn Quỳnh Anh" 
+        phone-number="01234578"
+        email-address="manuloren@gmail.com"
+        is-favorite="1"
+      ></friend-contact>
+      <friend-contact 
+        name="John Lorenz" 
+        phone-number="01234578" 
+        email-address="manuloren@gmail.com"
+        is-favorite="0"
+      ></friend-contact>
     </ul>
   </section>
 </template>
