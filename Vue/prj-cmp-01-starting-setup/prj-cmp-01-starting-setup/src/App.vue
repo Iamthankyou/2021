@@ -1,4 +1,5 @@
 <template>
+    <the-header title="RememberMe"></the-header>
     <stored-resources :resources="storeResources"></stored-resources>
 </template>
 
