@@ -1,7 +1,7 @@
 <template>
   <div>
     <the-header></the-header>
-    <badge-list></badge-list>
+    <!-- <badge-list></badge-list>
     <user-info
       :full-name="activeUser.name"
       :info-text="activeUser.description"
@@ -10,7 +10,12 @@
     <course-goals  #default="slotProps">
         <h2>{{slotProps.item}}</h2>
         <p>{{slotProps['another-prop']}}</p>
-    </course-goals>
+    </course-goals> -->
+    <button @click="setSelectedComponent('active-goals')">Active Goal</button>
+    <button @click="setSelectedComponent('manage-goals')">Manage Goal</button>
+    <!-- <active-goals v-if="selectedComponent === 'active-goals'"></active-goals>
+    <manage-goals v-if="selectedComponent === 'manage-goals'"></manage-goals> -->
+    <component :is="selectedComponent"></component>
   </div>
 </template>
 
@@ -22,6 +27,7 @@ export default {
   },
   data() {
     return {
+      selectedComponent:'active-goals',
       activeUser: {
         name: 'Maximilian Schwarzmüller',
         description: 'Site owner and admin',
@@ -29,6 +35,11 @@ export default {
       },
     };
   },
+  methods: {
+    setSelectedComponent(cmp){
+      this.selectedComponent = cmp;
+    }
+  }
 };
 </script>
 
