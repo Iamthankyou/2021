@@ -41,8 +41,20 @@ const router = createRouter({
         if (savedPosition){
             return savedPosition;
         }
-        
+
         return {left:0, top:0};
+    }
+});
+
+router.beforeEach((to, from, next)=>{
+    if (to.name === 'team-members'){
+        next();
+    }
+    else{
+        next({
+            name: 'team-members',
+            params: {teamId: 't2'}
+        });
     }
 });
 
