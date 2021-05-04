@@ -11,10 +11,17 @@ const router = createRouter({
     history: createWebHistory(),
     routes: [
         // {path: '/', alia},
-        {path: '/teams',component:TeamsList, alias:"/", children:[
-            {path: ':teamId', component:TeamMembers, props: true},// our-domain.com/team => TeamsList
+        {
+        name:'teams',
+        path: '/teams',
+        component:TeamsList, 
+        alias:"/", 
+        children:[
+            {name: 'team-members', path: ':teamId', component:TeamMembers, props: true},// our-domain.com/team => TeamsList
         ]}, // our-domain.com/team => TeamsList
+        
         {path: '/users',component:UsersList},
+        
         {path: '/:notFound(.*)', component:NotFound}
     ],
     linkActiveClass: 'active'
