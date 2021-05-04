@@ -5,7 +5,8 @@
       <div>
         <base-button @click="loadExpreiences">Load Submitted Experiences</base-button>
       </div>
-      <ul>
+      <p v-if="isLoading">Loading...</p>
+      <ul v-if="!isLoading">
         <survey-result
           v-for="result in results"
           :key="result.id"
@@ -28,18 +29,19 @@ export default {
   data(){
     return {
       results: [],
-      isLoading: false
+      isLoading: true
     }
   },
 
   methods:{
     loadExpreiences(){
-      
+      this.isLoading = true;
       fetch('https://vue-http-demo-957e5-default-rtdb.asia-southeast1.firebasedatabase.app/surveys.json').then((response)=>{
         if (response.ok){
           return response.json();
         }
       }).then((data)=>{
+        this.isLoading = false;
         const results = [];
         console.log(data);
       for (const id in data){
