@@ -27,7 +27,8 @@ export default {
   
   data(){
     return {
-      results: []
+      results: [],
+      isLoading: false
     }
   },
 
@@ -47,6 +48,10 @@ export default {
         this.results = results;
         });
     }
+  },
+
+  mounted(){
+    this.loadExpreiences();
   }
 };
 </script>
