@@ -29,7 +29,11 @@ const router = createRouter({
         components:{
             default:UsersList,
             footer: UsersFooter
-        }},
+        },
+        beforeEnter(to, from, next){
+            next();
+        }
+        },
         
         {path: '/:notFound(.*)', component:NotFound}
     ],
@@ -47,16 +51,23 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next)=>{
-    if (to.name === 'team-members'){
-        next();
-    }
-    else{
-        next({
-            name: 'team-members',
-            params: {teamId: 't2'}
-        });
-    }
+    // if (to.name === 'team-members'){
+    //     next();
+    // }
+    // else{
+    //     next({
+    //         name: 'team-members',
+    //         params: {teamId: 't2'}
+    //     });
+    // }
+    next();
 });
+
+// router.afterEach((to, from)=>{
+//     // sending analytics data
+
+
+// });
 
 const app = createApp(App)
 

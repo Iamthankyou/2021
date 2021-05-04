@@ -34,6 +34,9 @@ export default {
     this.loadTeamMember(this.teamId);
     console.log(this.$route.query);
   },
+  beforeRouteUpdate(to, from, next){
+    next();
+  },
   methods:{
     loadTeamMember(teamId){
       const selectedTeam = this.teams.find(team=>team.id === teamId);
