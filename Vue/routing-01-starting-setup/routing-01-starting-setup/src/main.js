@@ -2,12 +2,12 @@ import { createApp } from 'vue';
 import {createRouter, createWebHistory} from 'vue-router';
 
 import App from './App.vue';
-import TeamsList from './components/teams/TeamsList.vue';
-import UsersList from './components/users/UsersList.vue';
+import TeamsList from './pages/TeamsList.vue';
+import UsersList from './pages/UsersList.vue';
 import TeamMembers from './components/teams/TeamMembers.vue';
-import NotFound from './components/nav/NotFound.vue';
-import TeamsFooter from './components/teams/TeamsFooter.vue';
-import UsersFooter from './components/users/UsersFooter.vue';
+import NotFound from './pages/NotFound.vue';
+import TeamsFooter from './pages/TeamsFooter.vue';
+import UsersFooter from './pages/UsersFooter.vue';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -20,6 +20,7 @@ const router = createRouter({
             default: TeamsList,
             footer: TeamsFooter
         }, 
+        meta:{needsAuth: true},
         alias:"/", 
         children:[
             {name: 'team-members', path: ':teamId', component:TeamMembers, props: true},// our-domain.com/team => TeamsList
@@ -58,9 +59,16 @@ router.beforeEach((to, from, next)=>{
     //     next({
     //         name: 'team-members',
     //         params: {teamId: 't2'}
-    //     });
+    //     });  
     // }
-    next();
+
+    if (to.meta.needsAuth){
+        console.log('Needs auth');
+        next();
+    }
+    else{
+        next();
+    }
 });
 
 // router.afterEach((to, from)=>{
