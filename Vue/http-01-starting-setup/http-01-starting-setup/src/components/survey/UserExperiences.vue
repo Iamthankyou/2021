@@ -6,9 +6,11 @@
         <base-button @click="loadExpreiences">Load Submitted Experiences</base-button>
       </div>
       <p v-if="isLoading">Loading...</p>
-      <ul v-if="!isLoading">
+      <p v-else-if="!isLoading && (results.length===0)">No stored expreriences foun. Start adding some survey experienes</p>
+      <p v-else-if="!isLoading && error">Error Messgge: {{error}}</p>
+      <ul v-else>
         <survey-result
-          v-for="result in results"
+          v-for="result in results" 
           :key="result.id"
           :name="result.name"
           :rating="result.rating"
@@ -29,7 +31,8 @@ export default {
   data(){
     return {
       results: [],
-      isLoading: true
+      isLoading: false,
+      error: null
     }
   },
 
@@ -48,6 +51,9 @@ export default {
           results.push({id: id, name: data[id].name, rating: data[id].rating});
         }
         this.results = results;
+        })
+        .catch((error)=>{
+          this.error = error;
         });
     }
   },
