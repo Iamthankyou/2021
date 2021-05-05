@@ -33,6 +33,10 @@ const counterModule = {
             context.commit('increase', payload);
         },
 
+        login(){
+            
+        }
+
     },
 
     getters:{
