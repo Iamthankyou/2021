@@ -3,6 +3,7 @@
     <the-counter></the-counter>
     <change-counter></change-counter>
     <favorite-value></favorite-value>
+    <button @click="addOne">Click</button>
   </base-container>
 </template>
 
@@ -24,8 +25,7 @@ export default {
   methods:{
     addOne(){
       // this.$store.state.counter++;
-
-      this.$store.commit({
+      this.$store.dispatch({
         type:'increase',
         value: 10
       });

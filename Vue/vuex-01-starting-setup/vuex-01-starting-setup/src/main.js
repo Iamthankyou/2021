@@ -12,6 +12,8 @@ const store = createStore({
     
     mutations:{
         increment(state){
+            state.counter = state.counter+2;
+
             state.counter+=2;
         },
 
@@ -21,13 +23,25 @@ const store = createStore({
         
     },
 
-    getters:{
-        finalCounter(state){
-            return state.counter*2;
+    actions:{
+        increment(context){
+            setTimeout(()=>{
+                context.commit('increment');
+            },2000);
         },
 
-        normalizedCounter(state){
-            const finalCounter = state.counter*3;
+        increase(context, payload){
+            context.commit('increase', payload);
+        }
+    },
+
+    getters:{
+        finalCounter(state){
+            return state.counter;
+        },
+
+        normalizedCounter(state,getters){
+            const finalCounter = getters.finalCounter;
             
             if (finalCounter<0){
                 return 0;
