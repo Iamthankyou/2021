@@ -5,7 +5,7 @@
     <favorite-value></favorite-value>
     <button @click="addOne">Click</button>
   </base-container>
-  <base-container title="Auth" v-if="!userIsAuthenticated">
+  <base-container title="Auth">
     <user-auth></user-auth>
   </base-container>
 </template>
