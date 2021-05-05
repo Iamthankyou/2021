@@ -5,15 +5,21 @@
   </div>
 
   <div class="container">
-    <transition name="para">
+    <transition name="para" @enter="enter" @after-enter="afterEnter" @before-enter="beforeEnter" @before-leave="beforeLeave">
       <p v-if="paraIsVisible">This is a pararaaph</p>
     </transition>
     <button @click="toggleParagraph">Toggle Paragraph</button>
   </div>
-  <base-modal @close="hideDialog" v-if="dialogIsVisible">
-    <p>This is a test dialog!</p>
-    <button @click="hideDialog">Close it!</button>
-  </base-modal>
+  <div class="container">
+    <transition name="fade-button" mode="out-in">
+      <button @click="showUser" v-if="!userAreVisible">Show Users</button>
+      <button @click="hideUser" v-else>Hide Users</button>
+    </transition> 
+  </div>
+    <base-modal @close="hideDialog" :open="dialogIsVisible">
+      <p>This is a test dialog!</p>
+      <button @click="hideDialog">Close it!</button>
+    </base-modal>
   <div class="container">
     <button @click="showDialog">Show Dialog</button>
   </div>
@@ -25,10 +31,19 @@ export default {
     return { 
       dialogIsVisible: false,
       animatedBlock: false,
-      paraIsVisible: false
+      paraIsVisible: false,
+      userAreVisible: false
        };
   },
   methods: {
+    showUser(){
+      this.userAreVisible = true;
+    },
+    
+    hideUser(){
+      this.userAreVisible = false;
+    },
+
     showDialog() {
       this.dialogIsVisible = true;
     },
@@ -43,6 +58,24 @@ export default {
 
     toggleParagraph(){
       this.paraIsVisible = !this.paraIsVisible;
+    },
+
+    beforeEnter(el){
+      console.log('Before Enter');
+      console.log(el);
+    },
+
+    beforeLeave(el){
+      console.log('Before Leave');
+      console.log(el);
+    },
+
+    enter(){
+      console.log('Enter');
+    },
+
+    afterEnter(){
+      console.log('After Enter');
     }
   },
 };
@@ -83,6 +116,45 @@ export default {
 .para-leave-to{
    /* opacity: 0;
   transform: translateY(30px);  */
+}
+
+.modal-enter-from{
+
+}
+
+.modal-enter-active{
+  animation: model 0.3s ease-out;
+}
+
+.model-enter-from{
+}
+
+.fade-button-enter-from{
+  opacity:0;
+}
+
+.fade-button-enter-active{
+  transition: opacity 0.3s ease-out;
+}
+
+.fade-button-enter-to{
+  opacity:1;
+}
+
+.fade-button-leave-active{
+  transition: opacity 0.3s ease-in;
+}
+
+@keyframes modal{
+  from{
+    opacity: 0;
+    transform: translateY(-50px) scale(0.9);
+  }
+
+  to{
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 @keyframes slide-scale{
