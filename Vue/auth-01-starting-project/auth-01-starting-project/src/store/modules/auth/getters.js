@@ -10,5 +10,9 @@ export default{
     isAuthenticated(state){
         // console.log(state.token!==null);
         return state.token!==null;
+    },
+
+    didAutoLogout(state){
+        return state.didAutoLogout;
     }
 }
