@@ -1,4 +1,10 @@
 <template>
+    <base-dialog :show="!!error" title="An error oocurred" @close="handleError">
+        <p>{{error}}</p>
+    </base-dialog>
+    <base-dialog :show="isLoading" title="Authenticating" fixed>
+        <base-spinner></base-spinner>
+    </base-dialog>
     <base-card>
         <form @submit.prevent="submitForm">
             <div class="form-control">
@@ -26,27 +32,40 @@ export default {
             email:'',
             password:'',
             formIsValid: true,
-            mode: 'login'
+            mode: 'login',
+            isLoading: false,
+            error: null
         }
     },
 
     methods:{        
-        submitForm(){
+        async submitForm(){
             this.formIsValid = true;
             if (this.email === '' || !this.email.includes('@') || this.password.length <6){
                 this.formIsValid = false;
                 return;
             }
 
-            if (this.mode === 'login'){
-                console.log('login');
+            this.isLoading = true;
+
+            try {
+
+                if (this.mode === 'login'){
+                    console.log('login');
+                }
+                else{
+                    await this.$store.dispatch('signup', {
+                        email: this.email,
+                        password: this.password
+                    });
+                }
             }
-            else{
-                this.$store.dispatch('signup', {
-                    email: this.email,
-                    password: this.password
-                });
+            catch(e){
+                this.error = e.message || 'Failed to authenticate, try later.';
             }
+
+
+            this.isLoading = false;
         },
 
         switchAuthMode(){
@@ -56,6 +75,10 @@ export default {
             else{
                 this.mode = 'login';
             }
+        },
+
+        handleError(){
+            this.error = null;
         }
     },
 
