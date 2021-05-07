@@ -26,8 +26,7 @@ export default {
     const coachId = context.rootGetters.userId;
     const token = context.rootGetters.token;
 
-    const response = await fetch(`https://vue-http-demo-957e5-default-rtdb.asia-southeast1.firebasedatabase.app/
-/requests/${coachId}.json?auth=`+token);
+    const response = await fetch(`https://vue-http-demo-957e5-default-rtdb.asia-southeast1.firebasedatabase.app/requests/${coachId}.json?auth=`+token);
     const responseData = await response.json();
 
     if (!response.ok) {
@@ -35,6 +34,7 @@ export default {
       throw error;
     }
 
+    console.log(responseData);
     const requests = [];
 
     for (const key in responseData) {
