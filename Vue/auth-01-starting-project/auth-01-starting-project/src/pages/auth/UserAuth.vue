@@ -1,28 +1,30 @@
 <template>
-    <base-dialog :show="!!error" title="An error oocurred" @close="handleError">
-        <p>{{error}}</p>
-    </base-dialog>
-    <base-dialog :show="isLoading" title="Authenticating" fixed>
-        <base-spinner></base-spinner>
-    </base-dialog>
-    <base-card>
-        <form @submit.prevent="submitForm">
-            <div class="form-control">
-                <label for="email">Email</label>
-                <input type="email" id ="email" v-model="email"/>
-            </div>
+    <div>
+        <base-dialog :show="!!error" title="An error oocurred" @close="handleError">
+            <p>{{error}}</p>
+        </base-dialog>
+        <base-dialog :show="isLoading" title="Authenticating" fixed>
+            <base-spinner></base-spinner>
+        </base-dialog>
+        <base-card>
+            <form @submit.prevent="submitForm">
+                <div class="form-control">
+                    <label for="email">Email</label>
+                    <input type="email" id ="email" v-model="email"/>
+                </div>
 
-            <div class="form-control">
-                <label for="password">Password</label>
-                <input type="password" id ="password" v-model="password"/>
-            </div>
+                <div class="form-control">
+                    <label for="password">Password</label>
+                    <input type="password" id ="password" v-model="password"/>
+                </div>
 
-            <p v-if="!formIsValid">Please enter a valid email and password</p>
+                <p v-if="!formIsValid">Please enter a valid email and password</p>
 
-            <base-button>{{submitButtonCaption}}</base-button>
-            <base-button type="button" mode="flat" @click="switchAuthMode">{{swithModeButtonCaption}}</base-button>
-        </form>
-    </base-card>
+                <base-button>{{submitButtonCaption}}</base-button>
+                <base-button type="button" mode="flat" @click="switchAuthMode">{{swithModeButtonCaption}}</base-button>
+            </form>
+        </base-card>
+    </div>
 </template>
 
 <script>
