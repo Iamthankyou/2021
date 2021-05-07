@@ -33,9 +33,19 @@ export default {
     methods:{        
         submitForm(){
             this.formIsValid = true;
-            if (this.email === '' || !this.email.includes('@') || this.password.length <0){
+            if (this.email === '' || !this.email.includes('@') || this.password.length <6){
                 this.formIsValid = false;
                 return;
+            }
+
+            if (this.mode === 'login'){
+                console.log('login');
+            }
+            else{
+                this.$store.dispatch('signup', {
+                    email: this.email,
+                    password: this.password
+                });
             }
         },
 
